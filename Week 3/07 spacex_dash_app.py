@@ -11,8 +11,6 @@ spacex_df = pd.read_csv("spacex_launch_dash.csv")
 max_payload = spacex_df['Payload Mass (kg)'].max()
 min_payload = spacex_df['Payload Mass (kg)'].min()
 
-
-
 # Create a dash application
 app = dash.Dash(__name__)
 
@@ -62,7 +60,7 @@ def get_pie_chart(entered_site):
                      title='Total Success Launches By Site')        
     else:
         new_df = spacex_df[spacex_df["Launch Site"] == entered_site]["class"].value_counts().to_frame()
-        new_df["name"] = ["Failure", "Success"]
+        new_df["name"] = ["Success","Failure"]
         fig = px.pie(new_df, values='count', names='name', title='Total Success Launches for ' + entered_site)
         # return the outcomes piechart for a selected site
     return fig
